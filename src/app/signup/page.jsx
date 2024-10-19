@@ -1,6 +1,9 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
 import '@/assets/css/login.css'
+import Link from 'next/link'
+import { FaEye, FaUser } from 'react-icons/fa'
+import { MdEmail } from 'react-icons/md'
 // import '../../assets/css/login.css'
 // import { UserAuthContext } from '../../context/userContext'
 // import { Link, useNavigate } from 'react-router-dom'
@@ -36,11 +39,11 @@ const SignUp = () => {
           {/* <form onSubmit={createUser}> */}
           <form>
             <div className="inputBox">
-              <span className="fas fa-user"></span>
+              <span ><FaUser /></span>
               <input type="text" id="username" name="username" required placeholder="Username" />
             </div>
             <div className="inputBox">
-              <span className="fas fa-envelope"></span>
+              <span ><MdEmail /></span>
               <input
                 type="email"
                 name="email" required placeholder="Email"
@@ -48,7 +51,7 @@ const SignUp = () => {
                 />
             </div>
             <div className="inputBox">
-              <span className="fas fa-eye"></span>
+              <span><FaEye /></span>
               <input type="password"
                 name="password"
                 required placeholder="Password"
@@ -60,7 +63,7 @@ const SignUp = () => {
             >Sign Up</button>
           </form>
           <div className="sign-up-link ">
-            {/* <p>Alrady Have Account? <Link to="/login">Login</Link></p> */}
+            <p>Alrady Have Account? <Link href="/login">Login</Link></p>
           </div>
         </div>
       </div>

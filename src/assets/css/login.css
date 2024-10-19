@@ -25,7 +25,8 @@
     
     .login-form h1,.signup-form h1{
       margin-bottom: 2rem;
-      /* font-size: 1.5rem; */
+      font-weight: bold;
+      font-size: 2.5rem;
       color: #ffffff;
     }
     
@@ -57,10 +58,13 @@
     }
     
     .sign-up-link{
-      color: #fffdfd;
+      /* color: #fffdfd; */
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 3rem;
+    }
+    .sign-up-link a{
+      color: #022ff9;
     }
     

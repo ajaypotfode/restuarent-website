@@ -1,6 +1,9 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
 import "@/assets/css/login.css"
+import Link from 'next/link'
+import { MdEmail } from "react-icons/md";
+import { FaEye } from 'react-icons/fa';
 // import { Link, useNavigate,Outlet } from 'react-router-dom'
 // import '../../assets/css/login.css'
 // import { UserAuthContext } from '../../context/userContext';
@@ -36,12 +39,12 @@ const Login = () => {
                     {/* <form action="/login" method="post" onSubmit={userLogin}> */}
                     <form action="/login" method="post">
                         <div className="inputBox">
-                            <span className="fas fa-envelope"></span>
+                            <span ><MdEmail /></span>
                             {/* <input type="email" id="email" name="email" required onChange={(e) => { setEmail(e.target.value) }} placeholder="Email" /> */}
                             <input type="email" id="email" name="email" required placeholder="Email" />
                         </div>
                         <div className="inputBox">
-                            <span className="fas fa-eye"></span>
+                            <span><FaEye /></span>
                             {/* <input type="password" id="pass" name="password" required onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" /> */}
                             <input type="password" id="pass" name="password" required placeholder="Password" />
                         </div>
@@ -49,7 +52,7 @@ const Login = () => {
                     </form>
                     <div className="sign-up-link ">
                         {/* <p>Don't have account? <Link to="/signup">Sign UP</Link></p> */}
-                        <p>Don't have an account</p>
+                        <p>Don't have an account ? <Link href="/signup">Sign UP</Link></p>
                     </div>
                 </div>
             </div>
