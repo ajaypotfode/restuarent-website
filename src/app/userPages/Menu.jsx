@@ -6,37 +6,14 @@ import { menuimg } from "@/data/Data";
 import data from "@/data/menu"
 import { UserAuthContext } from "../../context/userContext";
 import Image from "next/image";
-// import { ToastContainer, toast } from 'react-toastify';
+import { MdFreeBreakfast } from "react-icons/md";
 
 
 const Menu = () => {
   const context = useContext(UserAuthContext);
   const [updatedFood, setUpdatedFood] = useState(data)
-   const {getMenuData,user,cartItems}=context
-
-  const foodType = (foodname) => {
-    const fType = data.filter((fItems) => {
-      return foodname == fItems.category
-    })
-    setUpdatedFood(fType)
-  }
   
-  const addToCart = (image, name, price, id) => {
-    // Check if user is authenticated
-    // if (!user) {
-    //   toast.error("Login First");
-    //   return;
-    // }
-
-  //   // Check if the item already exists in the cart
-    const existingItem = cartItems.find((item) => item.id === id);
-    if (existingItem) {
-      return;
-    }
-
-  //   // Add new item to the cart
-    getMenuData({image,name, price, id})
-  }
+  const { foodData } = context
   return (
     <>
       <section className="menu" id="menu">
@@ -44,40 +21,36 @@ const Menu = () => {
           our <span>menu</span>
         </h1>
         <div className="menutype" id="menulist" >
-          {
-            menuimg.map((items, index) => {
-              return (
-                <>
-                  <div className="menuitems" key={items.id} onClick={() => { foodType(items.name) }}>
-                   <img src={items.img} alt="" />
-                      <p>{items.name}</p>
-                  </div>
-                </>
-              )
-            })
-          }
+          {menuimg.map((items, index) => {
+            return (
+              <>
+                <div className="menuitems" key={items.id}>
+                  <span>{items.img}</span>
+                  <p>{items.name}</p>
+                </div>
+              </>
+            )
+          })}
         </div>
         <div className="box-container">
-          {updatedFood.map((item, index) => (
-            <div className="box" key={index}>
-              <div className="img">
-                <Image src={item.image} height={50} width={80}/>
+          {foodData.map((item, index) => {
+            return (
+              <div className="box" key={item._id}>
+                <div className="img">
+                  <Image src={item.image} height={50} width={80} alt="alternate img" />
+                </div>
+                <h3>{item.name}</h3>
+                <h5 className="text-light">{item.description}</h5>
+                <div className="price">
+                  {item.price} .Rs
+                </div>
+                <button className="btn bg-warning">Add TO Cart</button>
+
               </div>
-              <h3>{item.name}</h3>
-              <h5 className="text-light"> sit amet consectetur adipisicing elit. Accusantium magnam odit fugiat.</h5>
-              <div className="price">
-                Rs. {item.price}
-              </div>
-              <button className="btn bg-warning" onClick={()=>{addToCart(item.image,item.name,item.price,item.id)}} >Add TO Cart</button> 
-              {/* <button className="btn bg-warning" >Add TO Cart</button>  */}
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
-      {/* <ToastContainer
-         position="top-center"
-         autoClose={2000}
-         hideProgressBar/> */}
     </>
   );
 };

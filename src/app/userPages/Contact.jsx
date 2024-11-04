@@ -1,16 +1,9 @@
-import React from "react";
+
 import { FaPhone, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-// import {toast,ToastContainer } from 'react-toastify';
 
 const Contact = () => {
-
-  // const getEmail=(event)=>{
-  //   toast.info("Thank you for contacting us!!!")
-  //   // event.preventDefault();
-  // }
-
   return (
     <>
       <section className="contact" id="contact">

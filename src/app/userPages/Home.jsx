@@ -1,4 +1,4 @@
-import React from "react";
+
 // import images from "../../public/project2/Images/menu-card"
 const Home = () => {
   return (

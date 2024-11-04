@@ -1,33 +1,19 @@
 "use client"
 import React, { useContext, useRef } from "react";
-// import Logo from "../../assets/images/logo.png";
-// import { NavLink, useNavigate } from "react-router-dom";
-// import { UserAuthContext } from "../../context/userContext";
-// import {toast,ToastContainer } from 'react-toastify';
 import Image from "next/image";
 import { FaBars, FaCartPlus } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  // const context = useContext(UserAuthContext);
-  // const navigate = useNavigate(null)
   const router = useRouter();
   const navbarRef = useRef();
-  // const {LogOut,user,cartItems}=context
 
   const navbarHandler = () => {
     navbarRef.current.classList.toggle("active");
   }
 
-  // async function userLogout() {
-  //   await LogOut();
-  //   navigate('/login')
-  // }
-
   const handlecart = () => {
-    // return user?navigate('/cart'):
-    //         toast.error("Login First");
     return router.push("/cart")
   }
 
@@ -47,6 +33,7 @@ const Navbar = () => {
           <li className="link"><a href="#review">review</a></li>
           <li className="link"><a href="#contact">contact</a></li>
           <li className="link"><Link href="/login" className="btn">Login</Link></li>
+          <li className="link"><Link href="/admin" className="btn">Dashboard</Link></li>
           </ul>
         </nav>
         <div className="icons">

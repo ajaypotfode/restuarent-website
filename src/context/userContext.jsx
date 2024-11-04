@@ -1,45 +1,86 @@
 "use client"
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from 'firebase/auth';
+import { imageDb } from '@/utils/firebase';
+import axios from 'axios';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useRouter } from 'next/navigation';
 import React, { createContext, useEffect, useState } from 'react'
-import { app, auth } from './firebase';
+import { v4 as uuidv4 } from "uuid";
 
 export const UserAuthContext = createContext();
 const ContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [cartItems, setItems] = useState([])
 
-  const SignUp = (email, pass) => {
-    return createUserWithEmailAndPassword(auth, email, pass)
-  }
-  const Login = (email, pass) => {
-    return signInWithEmailAndPassword(auth, email, pass)
-  }
+  const [foodItem, setFoodItem] = useState({});
+  const [foodData, setFoodData] = useState([])
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false)
+   const router =useRouter()
 
-  const LogOut = async () => {
+  // getting image URL through the firebase
+  const handleImageUpload = async () => {
+    const { image } = foodItem;
+    if (!image) return null;
+    setLoading(true)
     try {
-      await auth.signOut();
+      const imageRef = ref(imageDb, `images/${image.name + uuidv4()}`);
+      const metadata = { contentType: image.type };
+      const uploadimage = await uploadBytes(imageRef, image, metadata);
+      return await getDownloadURL(uploadimage.ref);
+
     } catch (error) {
-      console.error('Error signing out:', error);
+      console.error("Image upload error:", error);
+      alert("Image upload error");
+      setLoading(false)
+      return null;
     }
   };
 
-  useEffect(() => {
-    const verify = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-    })
-    return verify;
-  })
+   // submiting a data to the mongo db
+  const submitFoodData = async (e) => {
+    e.preventDefault()
+    try {
+      const imageUrl = await handleImageUpload();
+      if (imageUrl == null) return;
 
-  const getMenuData = (data) => {
-    setItems([...cartItems, data])
+      const updatedFoodItem = { ...foodItem, image: imageUrl };
+
+      const res = await axios.post("http://localhost:3000/api/menuData", updatedFoodItem);
+      setLoading(false)
+      alert("Data submitted successfully");
+      window.location.reload()
+    } catch (error) {
+      console.error("Data submission error:", error);
+      window.location.reload()
+      setLoading(false)
+      setError(error);
+    }
+  };
+
+  // getting data from mongo db
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/menuData")
+        const data = await res.data
+        setFoodData(data)
+
+      } catch (error) {
+        console.error(error);
+      }
+    })()
+  }, [])
+
+  // Delete Food Item
+  const handleDelete=async(id)=>{
+      try {
+        const res= await axios.delete("http://localhost:3000/api/menuData/" + id)
+        alert("data deleted Successfully")
+        window.location.reload()
+      } catch (error) {
+        console.error(error)
+      }
   }
 
-  return <UserAuthContext.Provider value={{ user, SignUp, Login,LogOut, getMenuData,
-                                             cartItems,setItems}}>
+  return <UserAuthContext.Provider value={{foodItem,loading,foodData, setFoodItem,submitFoodData, handleDelete}}>
     {children}
   </UserAuthContext.Provider>
 }
