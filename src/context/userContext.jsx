@@ -7,13 +7,15 @@ import React, { createContext, useEffect, useState } from 'react'
 import { v4 as uuidv4 } from "uuid";
 
 export const UserAuthContext = createContext();
-const ContextProvider = ({ children }) => {
 
+const ContextProvider = ({ children }) => {
+   // for submiting a data to the mongo db
   const [foodItem, setFoodItem] = useState({});
+  //for getting data from mongo db
   const [foodData, setFoodData] = useState([])
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false)
-   const router =useRouter()
+  const router =useRouter()
 
   // getting image URL through the firebase
   const handleImageUpload = async () => {
@@ -60,14 +62,20 @@ const ContextProvider = ({ children }) => {
     (async () => {
       try {
         const res = await axios.get(process.env.NEXT_PUBLIC_DOMAIN+"/api/menuData")
+        // const res = await axios.get("nextjs-app-eight-tawny.vercel.app")
         const data = await res.data
         setFoodData(data)
-
       } catch (error) {
         console.error(error);
       }
     })()
   }, [])
+
+  // getting data category vise
+
+const getItemsCategory=async(type)=>{
+
+}
 
   // Delete Food Item
   const handleDelete=async(id)=>{
@@ -80,7 +88,7 @@ const ContextProvider = ({ children }) => {
       }
   }
 
-  return <UserAuthContext.Provider value={{foodItem,loading,foodData, setFoodItem,submitFoodData, handleDelete}}>
+  return <UserAuthContext.Provider value={{foodItem,loading,foodData,setFoodItem,submitFoodData, handleDelete}}>
     {children}
   </UserAuthContext.Provider>
 }
