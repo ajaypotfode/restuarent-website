@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import'@/assets/css/style.css'
 import ContextProvider from "@/context/userContext";
+import Script from "next/script";
 // import Navbar from "./userPages/pages/Navbar";
 
 const geistSans = localFont({
@@ -23,6 +24,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-J1HPJC9CJQ"></Script>
+<Script>
+ {
+  `
+   window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J1HPJC9CJQ');
+  `
+ }
+</Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

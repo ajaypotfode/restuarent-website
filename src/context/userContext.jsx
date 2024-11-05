@@ -43,7 +43,7 @@ const ContextProvider = ({ children }) => {
 
       const updatedFoodItem = { ...foodItem, image: imageUrl };
 
-      const res = await axios.post("http://localhost:3000/api/menuData", updatedFoodItem);
+      const res = await axios.post(process.env.NEXT_PUBLIC_DOMAIN+"/api/menuData", updatedFoodItem);
       setLoading(false)
       alert("Data submitted successfully");
       window.location.reload()
@@ -59,7 +59,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/menuData")
+        const res = await axios.get(process.env.NEXT_PUBLIC_DOMAIN+"/api/menuData")
         const data = await res.data
         setFoodData(data)
 
@@ -72,7 +72,7 @@ const ContextProvider = ({ children }) => {
   // Delete Food Item
   const handleDelete=async(id)=>{
       try {
-        const res= await axios.delete("http://localhost:3000/api/menuData/" + id)
+        const res= await axios.delete(process.env.NEXT_PUBLIC_DOMAIN+"/api/menuData/" + id)
         alert("data deleted Successfully")
         window.location.reload()
       } catch (error) {
