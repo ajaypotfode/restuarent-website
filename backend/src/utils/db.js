@@ -1,0 +1,1 @@
+export const connectionStr=process.env.CONNECTION_STR
