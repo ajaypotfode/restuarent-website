@@ -80,6 +80,7 @@ const ContextProvider = ({ children }) => {
           const res = await axios.get("http://localhost:3000/api/foodItem")
           const data = await res.data  
           setFoodData(data)
+          
         } catch (error) {
           console.error(error);
         }
