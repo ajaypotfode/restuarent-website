@@ -3,6 +3,7 @@ import "./globals.css";
 // import'@/assets/css/style.css'
 import '../assets/css/style.css'
 import ContextProvider from "../context/foodItemContext";
+import OrderContext from "../context/orderContext";
 import Script from "next/script";
 // import Navbar from "./userPages/pages/Navbar";
 
@@ -43,11 +44,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       >
         {/* <!-- Google Tag Manager (noscript) --> */}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NT75LJJ8"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
 {/* <!-- End Google Tag Manager (noscript) --> */}
         {/* <Navbar/> */}
        <ContextProvider>
-        {children}
+        <OrderContext>
+           {children}
+        </OrderContext>
        </ContextProvider>
       </body>
     </html>

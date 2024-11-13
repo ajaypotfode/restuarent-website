@@ -54,7 +54,7 @@ const ContextProvider = ({ children }) => {
 
       const updatedFoodItem = { ...foodItem, image: imageUrl };
 
-      const res = await axios.post("http://localhost:3000/api/foodItem", updatedFoodItem);
+      const res = await axios.post("http://localhost:4000/api/foodItem", updatedFoodItem);
       setLoading(false)
       alert("Data submitted successfully");
       setFoodItem({})
@@ -77,10 +77,11 @@ const ContextProvider = ({ children }) => {
     if (!loading) {
       (async () => {
         try {
-          const res = await axios.get("http://localhost:3000/api/foodItem")
+          setLoading(false)
+          const res = await axios.get("http://localhost:4000/api/foodItem")
           const data = await res.data  
           setFoodData(data)
-          
+
         } catch (error) {
           console.error(error);
         }
@@ -100,7 +101,7 @@ const ContextProvider = ({ children }) => {
   const handleDelete = async (id) => {
     try {
       setLoading(true)
-      const res = await axios.delete("http://localhost:3000/api/foodItem/" + id)  
+      const res = await axios.delete("http://localhost:4000/api/foodItem/" + id)  
       alert("data deleted Successfully")
       setLoading(false)
     } catch (error) {

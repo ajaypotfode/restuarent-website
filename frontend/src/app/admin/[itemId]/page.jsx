@@ -2,7 +2,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { UserAuthContext } from "../../../context/foodItemContext";
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import {useFoodData} from '../../../hooks/foodItem.js';
 // import { useRouter } from 'next/router';
 
@@ -16,12 +15,12 @@ const UpdateMenu = ({ params }) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/foodItem/"+id)
+        const res = await axios.get("http://localhost:4000/api/foodItem/"+id)
         const result = await res.data
         setUpdatedData(result)
       } catch (error) {
         
-        console.log("error");
+        console.error("error");
       }
     })()
   }, [])
@@ -30,13 +29,13 @@ const UpdateMenu = ({ params }) => {
     e.preventDefault()
     try {
       setLoading(true)
-      const res = await axios.put("http://localhost:3000/api/foodItem/" + id, updatedData)
+      const res = await axios.put("http://localhost:4000/api/foodItem/" + id, updatedData)
       alert("Data updated successfully")
       setLoading(false)
       router.push('/admin');
     } catch (error) {
       setLoading(false)
-      console.log(error);
+      console.error(error);
     }
   }
 

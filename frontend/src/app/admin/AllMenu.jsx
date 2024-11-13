@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 import { UserAuthContext } from "../../context/foodItemContext";
 import Link from "next/link";
 import { useContext, useEffect} from "react"
@@ -26,7 +27,7 @@ const AllMenu = () => {
             foodData.map((item, index) => {
               return (
                 <tr key={item._id}>
-                  <td><img src={`${item.image}`} width="50" /></td>
+                  <td><Image src={`${item.image}`} width="50" alt=" image not Found" height="50" /></td>
                   <td>{item.name}</td>
                   <td>{item.price} rs</td>
                   <td>{item.type}</td>

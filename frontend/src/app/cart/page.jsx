@@ -1,12 +1,14 @@
 "use client"
-import React, { useContext, useRef, useState } from 'react';
-import '@/assets/css/cart.css'
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import '../../assets/css/cart.css'
 // import '../../assets/css/cart.css';
-import { UserAuthContext } from '../../context/foodItemContext';
+import { OrderFood } from '../../context/orderContext';
+import Image from "next/image";
+
 const Cart = () => {
-    const context = useContext(UserAuthContext);
+    const context = useContext(OrderFood);
     // const navigate = useNavigate();
-    const { cartItems, setItems } = context;
+    const { cartItem,totalPrice, handleQuantityChange,removeCartItems} = context;
 
     return (
         <>
@@ -31,72 +33,50 @@ const Cart = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div className='item-name'>
-                                    <img src="/Images/menu-items/veg.png" alt="image not found" height={60} width={60} />
-                                    {/* <img src={``} alt="" height={60} width={60} /> */}
-                                    <span className='items-value'>Banana cake</span>
-                                </div>
-                            </td>
-                            <td>
-                                <input
-                                    className='items-value'
-                                    type="number"
-                                    // value="1"
-                                    min={1}
-                                />
-                            </td>
-                            <td>
-                                <span className='items-value'>
-                                    {/* {price * (quantities[name] || 1)} Rs */}
-                                    200 rs
-                                </span>
-                            </td>
-                            <td>
-                                <div className='action-btn'>
-                                    <span id='delete-btn'>delete</span>
-                                    <span>order</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className='item-name'>
-                                    <img src="/Images/menu-items/veg.png" alt="image not" height={60} width={60} />
-                                    {/* <img src={``} alt="" height={60} width={60} /> */}
-                                    <span className='items-value'>Banana cake</span>
-                                </div>
-                            </td>
-                            <td>
-                                <input
-                                    className='items-value'
-                                    type="number"
-                                    value="1"
-                                    min={1}
-                                />
-                            </td>
-                            <td>
-                                <span className='items-value'>
-                                    {/* {price * (quantities[name] || 1)} Rs */}
-                                    200 rs
-                                </span>
-                            </td>
-                            <td>
-                                <div className='action-btn'>
-                                    <span id='delete-btn'>delete</span>
-                                    <span>order</span>
-                                </div>
-                            </td>
-                        </tr>
+                        {
+                            cartItem.map((item, index) => {
+                                const { _id, name, price, image, quantity } = item
+                                return (
+                                    <tr key={_id}>
+                                        <td>
+                                            <div className='item-name'>
+                                                <Image src={image} alt="" height={60} width={60} />
+                                                <span className='items-value'>{name}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input
+                                                className='items-value'
+                                                type="number"
+                                                name='quantity'
+                                                value={quantity}
+                                                min={1}
+                                                onChange={(e)=>handleQuantityChange(index,e.target.value)}
+                                            />
+                                        </td>
+                                        <td>
+                                            <span className='items-value'>
+                                                {price * quantity} Rs
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div className='action-btn'>
+                                                <span id='delete-btn' onClick={()=>removeCartItems(_id)}>cancle</span>
+                                                {/* <span>order</span> */}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
                     </tbody>
                 </table>
                 <div className="cart-footer">
                     <div className='items'>
                         <label htmlFor="">Total</label>
-                        <span className='items-value'>1000 Rs</span>
+                        <span className='items-value'>{totalPrice} Rs</span>
                     </div>
-                    <button className='btn '>Back To Menu</button>
+                    <button className='btn'>order</button>
                 </div>
             </div>
         </>

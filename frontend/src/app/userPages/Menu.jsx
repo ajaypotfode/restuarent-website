@@ -7,11 +7,14 @@ import { menuimg } from "../../data/Data";
 import { UserAuthContext } from "../../context/foodItemContext";
 import Image from "next/image";
 import { MdFreeBreakfast } from "react-icons/md";
+import { OrderFood } from "../../context/orderContext";
 
 
 const Menu = () => {
-  const context = useContext(UserAuthContext); 
-  const {getItemsCategory,filterdData } = context
+  const foodContext = useContext(UserAuthContext);
+  const cartContext = useContext(OrderFood)
+  const { getItemsCategory, filterdData } = foodContext
+  const { addCartItems, cartItem } = cartContext
   return (
     <>
       <section className="menu" id="menu">
@@ -22,7 +25,7 @@ const Menu = () => {
           {menuimg.map((items, index) => {
             return (
               <>
-                <div className="menuitems" key={items.id} onClick={()=>getItemsCategory(items.name)}>
+                <div className="menuitems" key={items.id} onClick={() => getItemsCategory(items.name)}>
                   <span>{items.img}</span>
                   <p>{items.name}</p>
                 </div>
@@ -32,18 +35,21 @@ const Menu = () => {
         </div>
         <div className="box-container">
           {filterdData.map((item, index) => {
+            const { _id, name, price, image, description } = item
             return (
-              <div className="box" key={item._id}>
+              <div className="box" key={_id}>
                 <div className="img">
-                  <Image src={item.image} height={50} width={80} alt="alternate img" />
+                  <Image src={image} height={50} width={80} alt="alternate img" />
                 </div>
-                <h3>{item.name}</h3>
-                <h5 className="text-light">{item.description}</h5>
+                <h3>{name}</h3>
+                <h5 className="text-light">{description}</h5>
                 <div className="price">
-                  {item.price} .Rs
+                  {price} .Rs
                 </div>
-                <button className="btn bg-warning">Add TO Cart</button>
-
+                <button
+                  className="btn bg-warning"
+                  onClick={() => addCartItems({ _id, name, price, image, quantity: 1 })}
+                >Add TO Cart</button>
               </div>
             )
           })}

@@ -12,14 +12,14 @@ const Review = () => {
         <div className="box-container">
           {review.map((item, index) => (
             <div className="box" key={index * Math.random()}>
-              <img src="/images/quote-img.png" alt="" className="quote" />
+              <img src="/images/quote-img.png" alt=" image not Found"  className="quote" />
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
                 nulla sit libero nemo fuga sequi nobis? Necessitatibus aut
                 laborum, nisi quas eaque laudantium consequuntur iste ex aliquam
                 minus vel? Nemo.
               </p>
-              <img src={item.image} className="user" alt="" />
+              <img src={item.image} className="user" alt=" image not Found"  />
               {/* <Image src={item.image} height={100} width={100}/> */}
               <h3>{item.name}</h3>
               <div className="stars">

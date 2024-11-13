@@ -1,6 +1,6 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
-import '@/assets/css/login.css'
+import '../../assets/css/login.css'
 import Link from 'next/link'
 import { FaEye, FaUser } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'

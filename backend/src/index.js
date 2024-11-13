@@ -32,7 +32,7 @@ async function serverStart(){
                     console.log("Error :", error);
                 })
         
-                app.listen(process.env.PORT ||3000 , () => {
+                app.listen(process.env.PORT ||4000 , () => {
                     console.log("server started at 3000 port");
                 })
             } catch (error) {
