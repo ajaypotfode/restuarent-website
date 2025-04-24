@@ -100,10 +100,13 @@ const ContextProvider = ({ children }) => {
   // Delete Food Item
   const handleDelete = async (id) => {
     try {
+      const confirm=window.confirm("are you want to delete")
+     if (confirm) {
       setLoading(true)
       const res = await axios.delete(`${process.env.NEXT_PUBLIC_DOMAIN}api/foodItem/${id}` )  
       alert("data deleted Successfully")
       setLoading(false)
+     }
     } catch (error) {
       console.error(error)
     }

@@ -1,4 +1,4 @@
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import "./globals.css";
 // import'@/assets/css/style.css'
 import '../assets/css/style.css'
@@ -7,16 +7,16 @@ import OrderContext from "../context/orderContext";
 import Script from "next/script";
 // import Navbar from "./userPages/pages/Navbar";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// const geistSans = localFont({
+//   src: "./fonts/GeistVF.woff",
+//   variable: "--font-geist-sans",
+//   weight: "100 900",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
 
 export const metadata = {
   title: "Restuarent-Web",
@@ -41,7 +41,8 @@ export default function RootLayout({ children }) {
          {/* <!--End Google Tag Manager -->  */}
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased`}
       >
         {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NT75LJJ8"

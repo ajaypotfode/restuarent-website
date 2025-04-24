@@ -9,9 +9,19 @@ const nextConfig = {
       }
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/dashboard',
+        destination: '/',
+        permanent: false,
+      },
+    ]
+  },
     eslint: {
       ignoreDuringBuilds: true,
     },
+
 };
 
 export default nextConfig;
