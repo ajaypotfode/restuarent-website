@@ -15,10 +15,20 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({ message: "invalid Password!!", success: false })
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+        // to handle Admin Role via jwt Token 
+        let token
+
+        if (email == process.env.ADMIN_EMAIL && password == process.env.ADMIN_PASSWORD) {
+            token = jwt.sign({ userId: user._id, role: "admin" }, process.env.JWT_SECRET, {
+                expiresIn: '1h'
+            })
+            return res.status(200).json({ message: "user Login Success!!", token, success: true, result: user })
+        }
+
+        // to handle user Role via jwt token
+        token = jwt.sign({ userId: user._id, role: "user" }, process.env.JWT_SECRET, {
             expiresIn: '1h'
         })
-
         return res.status(200).json({ message: "user Login Success!!", token, success: true, result: user })
 
     } catch (error) {
