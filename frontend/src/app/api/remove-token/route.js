@@ -3,7 +3,7 @@ const { NextResponse } = require("next/server")
 export const POST = async (req, res) => {
     try {
         const response = NextResponse.json({ success: true, message: "token removed and user Logged Out" }, { status: 200 })
-        response.cookies.set("token", "", {
+        response.cookies.set("restroToken", "", {
             httpOnly: true,
             path: '/',
             maxAge: 0,

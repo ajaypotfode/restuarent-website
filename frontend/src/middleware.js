@@ -1,10 +1,11 @@
 import { jwtDecode } from "jwt-decode";
 import { NextResponse } from "next/server";
-// import { cookies } from "next/headers";
 
 export async function middleware(request) {
-    const cookieData = await request.cookies.get("token")
-    const url = request.nextUrl
+    const { pathname } = request.nextUrl
+    const cookieData = await request.cookies.get("restroToken")
+    // const url = request.nextUrl
+
 
     let token
     if (cookieData) {
@@ -18,22 +19,25 @@ export async function middleware(request) {
         role = decoded.role
     }
 
-    // const adminRoute = ["/admin"]
 
-    // const protectedRoute = ["/cart"]
-    const authRoute = ['/login', '/signup']
+    const protectedRoute = ['/cart', "/orders", "/menu", "/admin"]
 
-    if (url.pathname.startsWith('/admin') && role !== "admin") {
-        return NextResponse.redirect(new URL("/", request.url))
-        //    return NextResponse.redirect(new URL("/dashboard", request.url));
+    if (token && (pathname === '/login' || pathname === '/signup')) {
+        return NextResponse.redirect(new URL('/', request.url));
     }
 
-    if (url.pathname.startsWith('/cart') && !token) {
-        return NextResponse.redirect(new URL("/", request.url));
+
+    if (pathname.startsWith('/admin') && role !== "admin") {
+        const redirectUrl = new URL('/', request.url)
+        redirectUrl.searchParams.set("error", "Admin_Only")
+        return NextResponse.redirect(redirectUrl)
     }
 
-    if (authRoute.includes(url.pathname) && token) {
-        return NextResponse.redirect(new URL('/'))
+    if (!token && protectedRoute.some((route) => pathname.startsWith(route))) {
+        const redirectUrl = new URL('/login', request.url)
+        redirectUrl.searchParams.set("error", "Login_required")
+        return NextResponse.redirect(redirectUrl)
+
     }
 
 }
@@ -43,7 +47,10 @@ export const config = {
         '/login',
         '/signup',
         '/admin',
+        '/admin/:path*',
+        '/menu',
         '/cart',
+        '/orders',
         '/'
     ]
 }

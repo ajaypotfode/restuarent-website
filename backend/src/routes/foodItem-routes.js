@@ -5,8 +5,9 @@ import { addUser, getUser } from "../controllers/signUp-controller.js";
 import { loginUser } from "../controllers/login-controller.js";
 
 const router = Router()
-router.use(verifyToken)
+// router.use(verifyToken)
 router.route("/get/foodItem").get(getFoodItem)
+router.use(verifyToken)
 router.route("/add/foodItem").post(addFoodItem)
 router.route("/update/foodItem/:id").put(updateFoodItem)
 router.route("/delete/foodItem/:id").delete(deleteFoodItem)

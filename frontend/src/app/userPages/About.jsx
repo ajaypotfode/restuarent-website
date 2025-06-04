@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 // import AboutImg from "/images/about-img"
 const About = () => {
@@ -10,7 +11,7 @@ const About = () => {
 
         <div className="row">
           <div className="image">
-            <img src="/images/about-img" alt="" />
+            <Image src="/images/about-image.jpg" alt="" />
 
           </div>
 

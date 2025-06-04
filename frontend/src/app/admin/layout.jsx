@@ -16,7 +16,9 @@ export default function RootLayout({ children }) {
           <li><Link href="/" className="btn">Home</Link></li>
         </ul>
       </nav>
-      {children}
+     <div className='admin-dashboard-container scrollbar-hidden'>
+       {children}
+     </div>
      </div>
     );
   }

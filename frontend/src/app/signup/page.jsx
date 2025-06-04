@@ -4,68 +4,76 @@ import '../../assets/css/login.css'
 import Link from 'next/link'
 import { FaEye, FaUser } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
+import UseUserAuth from '../../hooks/useUserAuth'
+import Image from 'next/image'
 // import '../../assets/css/login.css'
 // import { UserAuthContext } from '../../context/userContext'
 // import { Link, useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
-//   const context = useContext(UserAuthContext)
-//   const [email, setEmail] = useState("")
-//   const [password, setPassword] = useState("")
-//   const navigate = useNavigate()
-
-//   const createUser = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await context.SignUp(email, password)
-//     } catch (error) {
-//       window.alert(error)
-//       console.log(error);
-
-//     }
-//     console.log(context);
-//   }
-//   useEffect(() => {
-//     if (context.user) {
-//       navigate("/")
-//     }
-//   })
+  const { signUpData, handleSignUpData, getUserSignUp, setShowPassword, showPassword, formError } = UseUserAuth()
 
   return (
     <>
       <div className="signup-container">
-        <div className="signup-form ">
-          <h1 className='mb-5'>Sign Up</h1>
-          {/* <form onSubmit={createUser}> */}
-          <form>
-            <div className="inputBox">
-              <span ><FaUser /></span>
-              <input type="text" id="username" name="username" required placeholder="Username" />
-            </div>
-            <div className="inputBox">
-              <span ><MdEmail /></span>
-              <input
-                type="email"
-                name="email" required placeholder="Email"
+        {/* <div className='signup-form-wrapper scrollbar-hidden'> */}
+          <div className="signup-form ">
+            <h1 className='mb-5'>Sign Up</h1>
+            {/* <form onSubmit={createUser}> */}
+            <form onSubmit={getUserSignUp}>
+              <div className="inputBox">
+                <span ><i className="bi bi-person-circle"></i></span>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={signUpData.username || ""}
+                  onChange={handleSignUpData}
+                  placeholder="Username" />
+              </div>
+              {formError.username && <p style={{ color: "red", margin: "0px" }} >{formError.username}</p>}
+
+              <div className="inputBox">
+                <span ><i className="bi bi-envelope"></i></span>
+                <input
+                  type="email"
+                  id='mail'
+                  name="email"
+                  value={signUpData.email || ""}
+                  onChange={handleSignUpData}
+                  placeholder="Email"
                 // onChange={(e) => { setEmail(e.target.value) }} />
                 />
-            </div>
-            <div className="inputBox">
-              <span><FaEye /></span>
-              <input type="password"
-                name="password"
-                required placeholder="Password"
+              </div>
+              {formError.email && <p style={{ color: "red", margin: "0px" }} >{formError.email}</p>}
+
+              <div className="inputBox">
+                <span onClick={() => setShowPassword(!showPassword)}>
+                  {
+                    showPassword ? <i className="bi bi-eye-slash"></i> : <i className="bi bi-eye"></i>
+                  }
+                </span>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id='password'
+                  name="password"
+                  value={signUpData.password || ""}
+                  onChange={handleSignUpData}
+                  placeholder="Password"
                 // onChange={(e) => { setPassword(e.target.value) }} />
                 />
+              </div>
+              {formError.password && <p style={{ color: "red", margin: "0px" }} >{formError.password}</p>}
+
+              <button type="submit"
+                className="signup-button "
+              >Sign Up</button>
+            </form>
+            <div className="sign-up-link ">
+              <p>Already Have Account? <Link href="/login">Login</Link></p>
             </div>
-            <button type="submit"
-              className="signup-button btn btn-warning p-4"
-            >Sign Up</button>
-          </form>
-          <div className="sign-up-link ">
-            <p>Alrady Have Account? <Link href="/login">Login</Link></p>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </>)
 }

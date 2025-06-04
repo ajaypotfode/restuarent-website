@@ -25,3 +25,34 @@ body {
     text-wrap: balance;
   }
 }
+
+
+.react-toast {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
+
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+/* .scrollbar::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 5rem;
+} */

@@ -1,11 +1,13 @@
 // import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { addUserAPI, loginUserAPI } from "../../service/user-Api-service"
-import { setToken } from "../../service/accessToken-service";
+import { removeToken, setToken } from "../../service/accessToken-service";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const signupUser = createAsyncThunk("user/signup", async (signupData, { rejectWithValue }) => {
     try {
+        // console.log("sign up data:", signupData);
+
         const response = await addUserAPI(signupData);
 
         if (!response.success) {
@@ -22,15 +24,20 @@ export const loginUser = createAsyncThunk("user/login", async (loginData, { reje
     try {
         const response = await loginUserAPI(loginData);
 
+        console.log("login response is :",response);
+        
+
         if (!response.success) {
             return rejectWithValue(response)
         }
 
-        await setToken(response.token)
+        await setToken(response?.token)
 
         return response
     } catch (error) {
-        return rejectWithValue(error.response?.data || "failed to login User");
+        // console.log("error in catch box:",error.message);
+        
+        return rejectWithValue(error.response);
     }
 })
 
@@ -63,8 +70,14 @@ const userSlice = createSlice({
             state.loginData = action.payload
         }
     },
-    extraReducers: {
-
+    extraReducers: (builder) => {
+        builder
+            .addCase(signupUser.fulfilled, (state, action) => {
+                state.signUpData = {}
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
+                state.loginData = {}
+            })
     }
 
 })

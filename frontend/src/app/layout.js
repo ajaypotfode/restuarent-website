@@ -1,12 +1,11 @@
 // import localFont from "next/font/local";
 import "./globals.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 // import'@/assets/css/style.css'
 import '../assets/css/style.css'
-import ContextProvider from "../context/foodItemContext";
-import OrderContext from "../context/orderContext";
 import Script from "next/script";
-import { Provider } from "react-redux";
-import Store from "../redux/store";
+import ProviderSWrapper, { Providers } from "./providers";
+import { ToastContainer } from "react-toastify";
 // import Navbar from "./userPages/pages/Navbar";
 
 // const geistSans = localFont({
@@ -53,9 +52,12 @@ export default function RootLayout({ children }) {
         {/* <Navbar/> */}
         {/* <ContextProvider> */}
         {/* <OrderContext> */}
-        <Provider store={Store}>
+        <div className="react-toast">
+          <ToastContainer position="top-right" autoClose={1000} />
+        </div>
+        <ProviderSWrapper >
           {children}
-        </Provider>
+        </ProviderSWrapper>
         {/* </OrderContext>
         </ContextProvider> */}
       </body>

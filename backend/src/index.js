@@ -2,6 +2,8 @@ import express from "express"
 import dotenv from "dotenv"
 import foodItem from "./routes/foodItem-routes.js"
 import user from "./routes/user-route.js"
+import order from './routes/orders-route.js'
+// import verifyToken from '../middleware/verifyToken.js'
 import mongoose from "mongoose"
 import bodyParser from "body-parser"
 import cors from "cors"
@@ -23,8 +25,10 @@ dotenv.config({
 })
 
 //routes declaration 
-app.use("/api",user)
+app.use("/api", user)
+// app.use(verifyToken)
 app.use("/api", foodItem)
+app.use('/api', order)
 
 
 // server code 

@@ -7,6 +7,10 @@
   align-items: center;
   justify-content: center;
   gap: 100px;
+     /* width: 100%; */
+    /* max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  overscroll-behavior: contain; */
 }
 
 .navbar {
@@ -21,22 +25,37 @@
 }
 
 
-.add-form {
-  /* display: flex;
-    width: 60%;
+.admin-dashboard-container{
+   width: 100%;
+    max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 50px;
+}
+
+
+.add-food-form {
+  display: flex;
+    /* width: 60%; */
     flex-direction: column;
-    align-items: center; */
+    align-items: center;
   width: 60%;
   background: transparent;
   border: 0.2rem solid #ffc107;
-  padding: 2rem;
+  padding:1rem 5rem;
 
   /* padding: 20px; */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.add-form form {
+.add-food-form-wrapper{
+  /* border: 1px solid red; */
+  width: 80%;
+}
+
+
+.add-food-form form {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -45,15 +64,23 @@
   gap: 15px;
 }
 
-.add-form label {
+.add-food-form label {
   font-size: 14px;
   font-weight: bold;
 }
 
-.add-form input,
-.add-form select,
-.add-form textarea {
-  width: 60%;
+
+.add-food-form .input-wrapper{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  /* border: 1px solid red; */
+}
+
+.add-food-form input,
+.add-food-form select,
+.add-food-form textarea{
+  width: 100%;
   padding: 1rem;
   font-size: 1.7rem;
   color: #fff;
@@ -62,7 +89,27 @@
   border: 2px solid #ffc107;
 }
 
-.add-form .option {
+.add-food-form .image-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+   width: 100%;
+  /* padding: 1rem; */
+  font-size: 1.7rem;
+  color: #fff;
+  text-transform: none;
+  background: transparent;
+  border: 2px solid #ffc107;
+}
+
+.add-food-form .image-input input{
+  width: 90%;
+  /* flex: 1; */
+  border: none;
+
+}
+
+.add-food-form .option {
   /* width: 20%;
     padding: 1rem; */
   font-size: 1.7rem;
@@ -70,7 +117,7 @@
   /* border:2px solid  #ffc107; */
 }
 
-/* .add-form button {
+/* .add-food-form button {
     padding: 10px 20px;
     border: none;
     background-color: #5cb85c;
@@ -80,7 +127,7 @@
     cursor: pointer;
   } */
 
-.add-form button:hover {
+.add-food-form button:hover {
   background-color: #4cae4c;
 }
 

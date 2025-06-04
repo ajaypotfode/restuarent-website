@@ -1,18 +1,37 @@
+"use client"
 import { useSelector, useDispatch } from "react-redux";
-import { uploadImage, submitFood, fetchFoodItems, deleteFoodItem, setFoodItem, filterByCategory, resetFoodItem } from "../store/slices/foodSlice";
-import { useState } from "react";
+import { uploadImage, submitFood, updateFoodItem, fetchFoodItems, deleteFoodItem, setFoodItem, filterByCategory, resetFoodItem, getOneFoodItem, setUpdateFoodData } from "../redux/slice/foodItemSlice";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { foodFormValidate } from "../formValidation/foodFormValidate";
+import { setFormErrors } from "../redux/slice/globalSlice";
+// import { updateFoodItem } from "../redux/slice/foodItemSlice";
+// import { useState } from "react";
 
-const UseFoodItem = () => {
-    const { foodItem, foodData, filterdData, } = useSelector((state) => state.foodItem);
+const UseFoodData = () => {
+    const { newFoodData, foodItem, filterdData, updateFoodData } = useSelector((state) => state.foodItem);
+    const { loading, error, formError,isHydrated } = useSelector((state) => state.globalComponent)
     const dispatch = useDispatch();
     const imageInputRef = useRef();
+    const router = useRouter()
+    // const [filterData, setFilterData] = useState()
     //   const [image, setImage]=useState("")
 
     const handleFoodItemData = (e) => {
         const { name, value } = e.target
 
-        dispatch(setFoodItem({ foodItem, [name]: value }))
+        dispatch(setFoodItem({ ...newFoodData, [name]: value }))
+
+        // Object.keys(formError).length
     };
+
+    const handleUpdateFoodData = (e) => {
+        const { name, value } = e.target
+
+        dispatch(setUpdateFoodData({ ...updateFoodData, [name]: value }))
+    }
+
 
     const uploadFoodImage = (e) => {
         const image = e.target.files[0];
@@ -28,44 +47,78 @@ const UseFoodItem = () => {
     //     }
     // }
 
-    const submitFoodData = () => {
-        e.preventDefault();
-        if (!foodItem.image) {
-            alert("Upload Image First");
-            return;
+    const submitFoodData = async (e) => {
+        // e.preventDefault();
+          e.preventDefault();
+
+        if (foodFormValidate(newFoodData, dispatch)) {
+            if (!newFoodData.image) {
+                toast.info("wait for image Uploading!!")
+                return;
+            }
+
+            const response = await dispatch(submitFood(newFoodData)).unwrap();
+            if (response.success) {
+                imageInputRef.current.value = "";
+                toast.success("New Dish Added SuccessFully!!")
+            }
         }
-        dispatch(submitFood(foodItem));
-        imageInputRef.current.value = "";
     };
 
 
-    const getFoodItems = () => {
-        dispatch(fetchFoodItems())
+    const getFoodItems = (type) => {
+        dispatch(fetchFoodItems(type))
     };
+
+    const getFoodByID = (foodId) => {
+        dispatch(getOneFoodItem(foodId))
+    }
+
+
+    const resetCurrentFoodItem = async (e) => {
+        e.preventDefault();
+
+        if (foodFormValidate(updateFoodData, dispatch)) {
+            const response = await dispatch(updateFoodItem(updateFoodData)).unwrap()
+            if (response.success) {
+                toast.success("food-item Updated Successfully!!!")
+                router.push("/admin")
+            }
+        }
+    }
 
     const removeFoodItem = (id) => {
         dispatch(deleteFoodItem(id))
     };
 
-    const filterCategory = (type) => {
-        dispatch(filterByCategory(type))
-    };
 
-    // const resetCurrentFoodItem = () => dispatch(resetFoodItem());
+    const removeFormErrors=()=>{
+        // console.log("remove form Errors:");
+        
+        dispatch(setFormErrors({}))
+    }
 
     return {
+        newFoodData,
         foodItem,
-        foodData,
         filterdData,
+        updateFoodData,
         handleFoodItemData,
+        handleUpdateFoodData,
         uploadFoodImage,
         submitFoodData,
         getFoodItems,
+        getFoodByID,
         removeFoodItem,
-        filterCategory,
+        // filterCategory,
         resetCurrentFoodItem,
-        imageInputRef
+        imageInputRef,
+        loading,
+        error,
+        formError,
+        isHydrated,
+        removeFormErrors
     };
 }
 
-export default UseFoodItem
+export default UseFoodData

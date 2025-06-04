@@ -3,53 +3,71 @@ import React, { useContext, useEffect, useState } from 'react'
 // import "@/assets/css/login.css"
 import "../../assets/css/login.css"
 import Link from 'next/link'
-import { MdEmail } from "react-icons/md";
-import { FaEye } from 'react-icons/fa';
+import UseUserAuth from '../../hooks/useUserAuth';
+import Image from 'next/image';
 // import { Link, useNavigate,Outlet } from 'react-router-dom'
 // import '../../assets/css/login.css'
 // import { UserAuthContext } from '../../context/userContext';
 
 const Login = () => {
-    // const context = useContext(UserAuthContext);
-    // const [email, setEmail] = useState("")
-    // const [password, setPassword] = useState("")
-    // const navigate = useNavigate();
+    const { loginData, handleLoginData, getUserLogin, setShowPassword, showPassword, loading, error, formError } = UseUserAuth()
 
-    useEffect(() => {
-            // if (context.user) {
-            //     navigate("/")
-            // }
-    })
-
-    // const userLogin = async(e) => {
-    //     e.preventDefault();
-    //    try {
-    //     await context.Login(email,password)
-        
-    //    } catch (error) {
-    //       window.alert(error)
-    //       console.log(error);
-          
-    //    }
-    // }
     return (
         <>
             <div className="login-container">
+                <nav className="login-navbar">
+                    <ul className="navbar-list">
+                        <li className="logo-item">
+                            <a href="#" className="logo">
+                                <Image src="/images/logo.png" alt="Example Image" width={70} height={200} />
+                            </a>
+                        </li>
+                        <li className="heading-item">
+                            <h1 className="heading">
+                                Your <span>Orders</span>
+                            </h1>
+                        </li>
+                        <li className="nav-links">
+                            <Link href="/" className="btn">Home</Link>
+                            {/* <Link href="/menu" className='btn'>Menu</Link> */}
+                        </li>
+                    </ul>
+                </nav>
                 <div className="login-form">
                     <h1>Login</h1>
                     {/* <form action="/login" method="post" onSubmit={userLogin}> */}
-                    <form action="/login" method="post">
+                    <form action="/login" method="post" onSubmit={getUserLogin}>
                         <div className="inputBox">
-                            <span ><MdEmail /></span>
-                            {/* <input type="email" id="email" name="email" required onChange={(e) => { setEmail(e.target.value) }} placeholder="Email" /> */}
-                            <input type="email" id="email" name="email" required placeholder="Email" />
+                            <span ><i className="bi bi-envelope"></i></span>
+                            <input
+                                type="email"
+                                id="mail"
+                                name="email"
+                                value={loginData.email || ""}
+                                onChange={handleLoginData}
+                                placeholder="Email" />
                         </div>
+                        {formError.email && <p style={{ color: "red", margin: "0px" }} >{formError.email}</p>}
+
                         <div className="inputBox">
-                            <span><FaEye /></span>
-                            {/* <input type="password" id="pass" name="password" required onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" /> */}
-                            <input type="password" id="pass" name="password" required placeholder="Password" />
+                            <span onClick={() => setShowPassword(!showPassword)}>
+                                {
+                                    showPassword ? <i className="bi bi-eye-slash"></i> : <i className="bi bi-eye"></i>
+                                }
+                            </span>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id='password'
+                                name="password"
+                                value={loginData.password || ""}
+                                onChange={handleLoginData}
+                                placeholder="Password"
+                            // onChange={(e) => { setPassword(e.target.value) }} />
+                            />
                         </div>
-                        <button type="submit" className='btn btn-warning'>Login</button>
+                        {formError.password && <p style={{ color: "red", margin: "0px" }} >{formError.password}</p>}
+
+                        <button type="submit" className='login-button'>Login</button>
                     </form>
                     <div className="sign-up-link ">
                         {/* <p>Don't have account? <Link to="/signup">Sign UP</Link></p> */}

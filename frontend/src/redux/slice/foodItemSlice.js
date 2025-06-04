@@ -86,12 +86,12 @@
 
 // export default foodItemSlice.reducer
 
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { imageDb } from "../../utils/firebase";
-import { addFootItemAPI, deleteFootItemAPI, getFootItemAPI } from "../../service/foodItem-Api-service";
+import { addFoodItemAPI, deleteFoodItemAPI, getFoodItemAPI, getOneFoodItemAPI, updateFoodItemAPI } from "../../service/foodItem-Api-service";
+// import { addFootItemAPI, deleteFootItemAPI, getFootItemAPI } from "../../service/foodItem-Api-service";
 
 // Thunks (for async operations)
 
@@ -113,7 +113,7 @@ export const submitFood = createAsyncThunk(
     "food/submitFood",
     async (foodData, { rejectWithValue }) => {
         try {
-            const response = await addFootItemAPI(foodData);
+            const response = await addFoodItemAPI(foodData);
 
             if (!response.success) {
                 return rejectWithValue(response)
@@ -128,9 +128,11 @@ export const submitFood = createAsyncThunk(
 
 export const fetchFoodItems = createAsyncThunk(
     "food/fetchFoodItems",
-    async (_, { rejectWithValue }) => {
+    async (category, { rejectWithValue }) => {
         try {
-            const response = await getFootItemAPI()
+            const response = await getFoodItemAPI(category)
+            // console.log(response);
+
             return response
         } catch (error) {
             return rejectWithValue(error.message);
@@ -140,15 +142,15 @@ export const fetchFoodItems = createAsyncThunk(
 
 export const deleteFoodItem = createAsyncThunk(
     "food/deleteFoodItem",
-    async (id, { rejectWithValue }) => {
+    async (foodId, { rejectWithValue }) => {
         try {
-            const response = await deleteFootItemAPI(foodId)
+            const response = await deleteFoodItemAPI(foodId)
 
-        if (!response.success) {
-            return rejectWithValue(response)
-        }
+            if (!response.success) {
+                return rejectWithValue(response)
+            }
 
-        return response
+            return response.result?._id
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -156,22 +158,61 @@ export const deleteFoodItem = createAsyncThunk(
 );
 
 
+export const updateFoodItem = createAsyncThunk(
+    "food/updateFoodItem",
+    async (updateData, { rejectWithValue }) => {
+        try {
+            const response = await updateFoodItemAPI(updateData)
+
+            if (!response.success) {
+                return rejectWithValue(response)
+            }
+
+            return response
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const getOneFoodItem = createAsyncThunk(
+    "food/getOneFoodItem",
+    async (foodId, { rejectWithValue }) => {
+        try {
+            const response = await getOneFoodItemAPI(foodId)
+
+            if (!response.success) {
+                return rejectWithValue(response)
+            }
+            console.log("food Item by id :", response);
+
+            return response
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 
 const foodItemSlice = createSlice({
     name: "food",
     initialState: {
-        foodItem: {},
-        foodData: [],
+        foodItem: [],
+        newFoodData: {},
+        updateFoodData: {},
         filterdData: [],
         // loading: false,
         // error: null,
     },
     reducers: {
         setFoodItem(state, action) {
-            state.foodItem = action.payload;
+            state.newFoodData = action.payload;
+        },
+        setUpdateFoodData(state, action) {
+            state.updateFoodData = action.payload
         },
         filterByCategory(state, action) {
-            state.filterdData = state.foodData.filter(item => item.type === action.payload);
+            state.filterdData = state.foodItem.filter(item => item.type === action.payload);
         },
         resetFoodItem(state) {
             state.foodItem = {};
@@ -183,19 +224,22 @@ const foodItemSlice = createSlice({
                 // state.loading = true;
             })
             .addCase(uploadImage.fulfilled, (state, action) => {
-                state.foodItem.image = action.payload;
+                // console.log("image i slice:",action.payload);
+
+                state.newFoodData.image = action.payload;
                 // state.loading = false;
             })
             .addCase(uploadImage.rejected, (state, action) => {
-                // state.error = action.payload;
-                // state.loading = false;
+                state.newFoodData.image = '/image.png'
             })
 
             .addCase(submitFood.pending, (state) => {
                 // state.loading = true;
             })
             .addCase(submitFood.fulfilled, (state, action) => {
-                state.foodData.push(action.payload);
+
+                state.foodItem.push(action.payload.result);
+                state.newFoodData = {}
                 // state.loading = false;
             })
             .addCase(submitFood.rejected, (state, action) => {
@@ -207,7 +251,7 @@ const foodItemSlice = createSlice({
                 // state.loading = true;
             })
             .addCase(fetchFoodItems.fulfilled, (state, action) => {
-                state.foodData = action.payload;
+                state.foodItem = action.payload.result;
                 // state.loading = false;
             })
             .addCase(fetchFoodItems.rejected, (state, action) => {
@@ -219,15 +263,23 @@ const foodItemSlice = createSlice({
                 // state.loading = true;
             })
             .addCase(deleteFoodItem.fulfilled, (state, action) => {
-                state.foodData = state.foodData.filter(item => item._id !== action.payload);
+                console.log("foode item in slice :", action.payload);
+
+                state.foodItem = state.foodItem.filter(item => item._id !== action.payload);
                 // state.loading = false;
             })
             .addCase(deleteFoodItem.rejected, (state, action) => {
                 // state.error = action.payload;
                 // state.loading = false;
-            });
+            })
+            .addCase(updateFoodItem.fulfilled, (state, action) => {
+                state.updateFoodData = {}
+            })
+            .addCase(getOneFoodItem.fulfilled, (state, action) => {
+                state.updateFoodData = action.payload?.result
+            })
     }
 });
 
-export const { setFoodItem, filterByCategory, resetFoodItem } = foodItemSlice.actions;
+export const { setFoodItem, setUpdateFoodData, filterByCategory, resetFoodItem } = foodItemSlice.actions;
 export default foodItemSlice.reducer;

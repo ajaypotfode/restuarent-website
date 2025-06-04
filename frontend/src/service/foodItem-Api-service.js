@@ -1,16 +1,18 @@
 import axios from "axios";
+import token from "./accessToken-service";
 
-export const getFootItemAPI = async () => {
+export const getFoodItemAPI = async (category) => {
     // let data = JSON.stringify();
+    console.log(category);
+    
 
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'http://localhost:4000/api/get/foodItem',
+        url: `http://localhost:4000/api/get/foodItem?category=${category}`,
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization':`Bearer ${token}`   
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODBhMjYyOGNjNmQ1YzQ3YzEwOTBhODQiLCJpYXQiOjE3NDU0OTU3MDYsImV4cCI6MTc0NTQ5OTMwNn0.1SShT-G1uHKRr_gDwx-6cfFuWSHyAkoUjzy319PtjDE'
+            'Authorization': `Bearer ${token}`
         },
         // data: data
     };
@@ -22,7 +24,7 @@ export const getFootItemAPI = async () => {
     }
 }
 
-export const addFootItemAPI = async (foodData) => {
+export const addFoodItemAPI = async (foodData) => {
     let data = JSON.stringify(foodData);
 
     let config = {
@@ -31,7 +33,7 @@ export const addFootItemAPI = async (foodData) => {
         url: 'http://localhost:4000/api/add/foodItem',
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization':`Bearer ${token}`   
+            'Authorization': `Bearer ${token}`
         },
         data: data
     };
@@ -43,16 +45,16 @@ export const addFootItemAPI = async (foodData) => {
     }
 }
 
-export const updateFootItemAPI = async (foodData, id) => {
+export const updateFoodItemAPI = async (foodData) => {   /*8261883086 amit gavas*/
     let data = JSON.stringify(foodData);
 
     let config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: `http://localhost:4000/api/update/foodItem/${id}`,
+        url: `http://localhost:4000/api/update/foodItem/${foodData._id}`,
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization':`Bearer ${token}`   
+            'Authorization': `Bearer ${token}`
         },
         data: data
     };
@@ -64,7 +66,7 @@ export const updateFootItemAPI = async (foodData, id) => {
     }
 }
 
-export const deleteFootItemAPI = async (id) => {
+export const deleteFoodItemAPI = async (id) => {
     // let data = JSON.stringify();
 
     let config = {
@@ -73,7 +75,7 @@ export const deleteFootItemAPI = async (id) => {
         url: `http://localhost:4000/api/delete/foodItem/${id}`,
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization':`Bearer ${token}`   
+            'Authorization': `Bearer ${token}`
         },
         // data: data
     };
@@ -86,7 +88,9 @@ export const deleteFootItemAPI = async (id) => {
 }
 
 
-export const getOneFootItemAPI = async (id) => {
+export const getOneFoodItemAPI = async (id) => {
+    console.log("id is :", id);
+
     // let data = JSON.stringify();
 
     let config = {
@@ -95,7 +99,7 @@ export const getOneFootItemAPI = async (id) => {
         url: `http://localhost:4000/api/get/foodItem/${id}`,
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization':`Bearer ${token}`   
+            'Authorization': `Bearer ${token}`
         },
         // data: data
     };

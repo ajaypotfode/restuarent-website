@@ -3,6 +3,9 @@ import axios from "axios";
 export const addUserAPI = async (userData) => {
     let data = JSON.stringify(userData);
 
+    // console.log("data in service :", data);
+    
+
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -36,6 +39,7 @@ export const loginUserAPI = async (loginData) => {
     };
     try {
         const response = await axios.request(config)
+         console.log("login response is in service :",response);
         return response.data
     } catch (error) {
         console.error(error);
