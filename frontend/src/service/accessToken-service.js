@@ -9,7 +9,7 @@ if (typeof window !== "undefined") {
 
 export const setToken = async (token) => {
     const decoded = jwtDecode(token);
-    
+
     const restroToken = JSON.stringify(token)
 
     const role = JSON.stringify(decoded.role)
@@ -19,9 +19,9 @@ export const setToken = async (token) => {
         localStorage.setItem('role', role)
     }
 
-    const response = await axios.post(process.env.NEXT_PUBLIC_SET_TOKEN_URL, { restroToken })
+    const response = await axios.post('/api/set-token', { restroToken })
 
-// console.log("set Token Response is :",response);
+    // console.log("set Token Response is :",response);
 
 
 
@@ -36,7 +36,7 @@ export const removeToken = async () => {
         localStorage.removeItem("restroToken")
         localStorage.removeItem("role")
     }
-    const response = await axios.post(process.env.NEXT_PUBLIC_REMOVE_TOKEN_URL)
+    const response = await axios.post('/api/remove-token')
 
     if (response.data.success) {
         window.location.href = "/login"
