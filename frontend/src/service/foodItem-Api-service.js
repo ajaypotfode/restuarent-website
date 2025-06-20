@@ -9,7 +9,7 @@ export const getFoodItemAPI = async (category) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `http://localhost:4000/api/get/foodItem?category=${category}`,
+        url: `https://restuarent-website.onrender.com/api/get/foodItem?category=${category}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -30,7 +30,7 @@ export const addFoodItemAPI = async (foodData) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:4000/api/add/foodItem',
+        url: 'https://restuarent-website.onrender.com/api/add/foodItem',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -51,7 +51,7 @@ export const updateFoodItemAPI = async (foodData) => {   /*8261883086 amit gavas
     let config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: `http://localhost:4000/api/update/foodItem/${foodData._id}`,
+        url: `https://restuarent-website.onrender.com/api/update/foodItem/${foodData._id}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -72,7 +72,7 @@ export const deleteFoodItemAPI = async (id) => {
     let config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `http://localhost:4000/api/delete/foodItem/${id}`,
+        url: `https://restuarent-website.onrender.com/api/delete/foodItem/${id}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -96,7 +96,7 @@ export const getOneFoodItemAPI = async (id) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `http://localhost:4000/api/get/foodItem/${id}`,
+        url: `https://restuarent-website.onrender.com/api/get/foodItem/${id}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`

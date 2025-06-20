@@ -9,7 +9,7 @@ export const getOrderItemAPI = async () => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `http://localhost:4000/api/get/order`,
+        url: `https://restuarent-website.onrender.com/api/get/order`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -30,7 +30,7 @@ export const addOrderItemAPI = async (orderData) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:4000/api/add/order',
+        url: 'https://restuarent-website.onrender.com/api/add/order',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -52,7 +52,7 @@ export const deleteOrderItemAPI = async (id) => {
     let config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `http://localhost:4000/api/delete/order/${id}`,
+        url: `https://restuarent-website.onrender.com/api/delete/order/${id}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`

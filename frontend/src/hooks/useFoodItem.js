@@ -96,9 +96,7 @@ const UseFoodData = () => {
         dispatch(setFormErrors({}))
     }
 
-    const backToPage = () => {
-        router.back()
-    }
+
 
     return {
         newFoodData,
@@ -120,7 +118,7 @@ const UseFoodData = () => {
         formError,
         isHydrated,
         removeFormErrors,
-        backToPage
+        // backToPage
     };
 }
 

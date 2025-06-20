@@ -16,7 +16,12 @@ app.use(express.json())
 // app.use(bodyParser.json());
 
 // Enable CORS to allow requests from a different origin (frontend)
-app.use(cors());
+app.use(cors())
+// app.use(cors({
+//     origin:"http://localhost:3000",
+//     methods:['GET' ,'POST','PUT', 'DELETE'],
+//     credentials:true
+// }));
 
 
 // configur .env file to get data from it

@@ -1,11 +1,13 @@
 "use client"
 import '../../assets/css/admin.css'
+import Link from 'next/link'
 import Image from 'next/image'
-import UseFoodData from '../../hooks/useFoodItem'
+import { usePathname } from 'next/navigation';
 
 
 export default function RootLayout({ children }) {
-  const { backToPage } = UseFoodData()
+  const pathname = usePathname()
+
   return (
     <div>
       <nav className="navbar" >
@@ -17,7 +19,10 @@ export default function RootLayout({ children }) {
             </a>
           </li>
           <li> <h1 className="heading">Admin <span>Dashboard</span></h1></li>
-          <li><div onClick={backToPage} className="btn">Back</div></li>
+          {
+            pathname === '/admin' ? <li><Link href="/" className="btn">Home</Link></li> :
+              <li><Link href="/admin" className="btn">back</Link></li>
+          }
         </ul>
       </nav>
       <div className='admin-dashboard-container scrollbar-hidden'>
