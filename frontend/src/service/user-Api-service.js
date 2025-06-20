@@ -9,7 +9,7 @@ export const addUserAPI = async (userData) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `https://restuarent-website.onrender.com/api/auth/add/user`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/add/user`,
         headers: {
             'Content-Type': 'application/json',
             // 'Authorization':`Bearer ${token}`   
@@ -30,7 +30,7 @@ export const loginUserAPI = async (loginData) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `https://restuarent-website.onrender.com/api/auth/login/user`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/login/user`,
         headers: {
             'Content-Type': 'application/json',
             // 'Authorization':`Bearer ${token}`   

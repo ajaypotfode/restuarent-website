@@ -4,12 +4,12 @@ import token from "./accessToken-service";
 export const getFoodItemAPI = async (category) => {
     // let data = JSON.stringify();
     console.log(category);
-    
+
 
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://restuarent-website.onrender.com/api/get/foodItem?category=${category}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/get/foodItem?category=${category}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -30,7 +30,7 @@ export const addFoodItemAPI = async (foodData) => {
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://restuarent-website.onrender.com/api/add/foodItem',
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/add/foodItem`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -51,7 +51,7 @@ export const updateFoodItemAPI = async (foodData) => {   /*8261883086 amit gavas
     let config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: `https://restuarent-website.onrender.com/api/update/foodItem/${foodData._id}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/update/foodItem/${foodData._id}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -72,7 +72,7 @@ export const deleteFoodItemAPI = async (id) => {
     let config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `https://restuarent-website.onrender.com/api/delete/foodItem/${id}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/delete/foodItem/${id}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -96,7 +96,7 @@ export const getOneFoodItemAPI = async (id) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://restuarent-website.onrender.com/api/get/foodItem/${id}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/get/foodItem/${id}`,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
