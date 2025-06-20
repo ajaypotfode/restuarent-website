@@ -1,5 +1,4 @@
 "use client"
-import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../../assets/css/cart.css'
 // import '../../assets/css/cart.css';
 import Image from "next/image";
@@ -7,120 +6,6 @@ import UseCartItem from '../../hooks/useCartItem';
 import OrderForm from './AddOrder';
 import Link from 'next/link';
 import { FormSpinner } from '../../components/Loaders';
-
-
-const CartList = [
-    {
-        name: 'Biryani',
-        type: 'Lunch',
-        image: '/Images/menu-items/cake.png',
-        price: 200,
-        quantity: 1,
-    },
-    {
-        name: 'Pav-Bhaji',
-        type: 'Snack',
-        image: '/Images/menu-items/nonveg.png',
-        price: 100,
-        quantity: 2,
-    },
-
-    {
-        name: 'Caesar Salad',
-        type: 'Dinner',
-        image: '/Images/menu-items/salad.png',
-        price: 150,
-        quantity: 3,
-    },
-    {
-        name: 'Biryani',
-        type: 'Lunch',
-        image: '/Images/menu-items/cake.png',
-        price: 200,
-        quantity: 1,
-    },
-    {
-        name: 'Pav-Bhaji',
-        type: 'Snack',
-        image: '/Images/menu-items/nonveg.png',
-        price: 100,
-        quantity: 2,
-    },
-
-    {
-        name: 'Caesar Salad',
-        type: 'Dinner',
-        image: '/Images/menu-items/salad.png',
-        price: 150,
-        quantity: 3,
-    },
-    {
-        name: 'Biryani',
-        type: 'Lunch',
-        image: '/Images/menu-items/cake.png',
-        price: 200,
-        quantity: 1,
-    },
-    {
-        name: 'Pav-Bhaji',
-        type: 'Snack',
-        image: '/Images/menu-items/nonveg.png',
-        price: 100,
-        quantity: 2,
-    },
-
-    {
-        name: 'Caesar Salad',
-        type: 'Dinner',
-        image: '/Images/menu-items/salad.png',
-        price: 150,
-        quantity: 3,
-    },
-    {
-        name: 'Biryani',
-        type: 'Lunch',
-        image: '/Images/menu-items/cake.png',
-        price: 200,
-        quantity: 1,
-    },
-    {
-        name: 'Pav-Bhaji',
-        type: 'Snack',
-        image: '/Images/menu-items/nonveg.png',
-        price: 100,
-        quantity: 2,
-    },
-
-    {
-        name: 'Caesar Salad',
-        type: 'Dinner',
-        image: '/Images/menu-items/salad.png',
-        price: 150,
-        quantity: 3,
-    },
-    {
-        name: 'Biryani',
-        type: 'Lunch',
-        image: '/Images/menu-items/cake.png',
-        price: 200,
-        quantity: 1,
-    },
-    {
-        name: 'Pav-Bhaji',
-        type: 'Snack',
-        image: '/Images/menu-items/nonveg.png',
-        price: 100,
-        quantity: 2,
-    },
-
-    {
-        name: 'Caesar Salad',
-        type: 'Dinner',
-        image: '/Images/menu-items/salad.png',
-        price: 150,
-        quantity: 3,
-    }
-];
 
 
 const Cart = () => {
@@ -150,7 +35,7 @@ const Cart = () => {
                     <ul className="navbar-list">
                         <li className="logo-item">
                             <a href="#" className="logo">
-                                <Image src="/images/logo.png" alt="Example Image" width={70} height={200} />
+                                <Image src="/Images/logo.png" alt="Example Image" width={70} height={200} />
                             </a>
                         </li>
                         <li className="heading-item">

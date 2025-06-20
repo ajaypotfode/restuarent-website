@@ -11,7 +11,7 @@ import { setFormErrors } from "../redux/slice/globalSlice";
 
 const UseFoodData = () => {
     const { newFoodData, foodItem, filterdData, updateFoodData } = useSelector((state) => state.foodItem);
-    const { loading, error, formError,isHydrated } = useSelector((state) => state.globalComponent)
+    const { loading, error, formError, isHydrated } = useSelector((state) => state.globalComponent)
     const dispatch = useDispatch();
     const imageInputRef = useRef();
     const router = useRouter()
@@ -49,7 +49,7 @@ const UseFoodData = () => {
 
     const submitFoodData = async (e) => {
         // e.preventDefault();
-          e.preventDefault();
+        e.preventDefault();
 
         if (foodFormValidate(newFoodData, dispatch)) {
             if (!newFoodData.image) {
@@ -92,10 +92,12 @@ const UseFoodData = () => {
     };
 
 
-    const removeFormErrors=()=>{
-        // console.log("remove form Errors:");
-        
+    const removeFormErrors = () => {
         dispatch(setFormErrors({}))
+    }
+
+    const backToPage = () => {
+        router.back()
     }
 
     return {
@@ -117,7 +119,8 @@ const UseFoodData = () => {
         error,
         formError,
         isHydrated,
-        removeFormErrors
+        removeFormErrors,
+        backToPage
     };
 }
 

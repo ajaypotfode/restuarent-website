@@ -1,90 +1,4 @@
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-// import { addUserAPI, loginUserAPI } from "../../service/user-Api-service"
-// import { setToken } from "../../service/accessToken-service";
-// import { addFootItemAPI, deleteFootItemAPI, getFootItemAPI, updateFootItemAPI } from "../../service/foodItem-Api-service";
 
-
-// export const fetchFoodItem = createAsyncThunk("foodItem/fetch", async (_, { rejectWithValue }) => {
-//     try {
-//         const response = await getFootItemAPI()
-
-//         return response
-//     } catch (error) {
-//         return rejectWithValue(error.response?.data || "failed to fetch Data!!")
-//     }
-// })
-
-
-// export const addFodItem = createAsyncThunk("foodItem/add", async (foodData, { rejectWithValue }) => {
-//     try {
-//         const response = await addFootItemAPI(foodData);
-
-//         if (!response.success) {
-//             return rejectWithValue(response)
-//         }
-
-//         return response
-//     } catch (error) {
-//         return rejectWithValue(error.response?.data || "failed to Add FoodItem!!");
-//     }
-// })
-
-
-// export const updateFootItem = createAsyncThunk("foodItem/update", async (updateFood, { rejectWithValue }) => {
-//     try {
-//         const response = await updateFootItemAPI(updateFood)
-
-//         if (!response.success) {
-//             return rejectWithValue(response)
-//         }
-
-//         return response
-//     } catch (error) {
-//         return rejectWithValue(error.response?.data || "failed to Update User");
-//     }
-// })
-
-// export const deleteFootItem = createAsyncThunk("foodItem/update", async (foodId, { rejectWithValue }) => {
-//     try {
-//         const response = await deleteFootItemAPI(foodId)
-
-//         if (!response.success) {
-//             return rejectWithValue(response)
-//         }
-
-//         return response
-//     } catch (error) {
-//         return rejectWithValue(error.response?.data || "failed to Update User");
-//     }
-// })
-
-
-
-// const initialState = {
-//     foodItems: [],
-//     newFoodData: {},
-// }
-
-// const foodItemSlice = createSlice({
-//     name: "foodItem",
-//     initialState,
-//     reducers: {
-//         addFoodData: (state, action) => {
-//             state.newFoodData = action.payload
-//         }
-//     },
-//     extraReducers: (builder) => {
-//         builder
-//             .addCase(fetchFoodItem.fulfilled, (state, action) => {
-//                 state.foodItems = action.payload
-//             })
-//     }
-
-// })
-
-// export const { addFoodData } = foodItemSlice.actions
-
-// export default foodItemSlice.reducer
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -184,7 +98,7 @@ export const getOneFoodItem = createAsyncThunk(
             if (!response.success) {
                 return rejectWithValue(response)
             }
-            console.log("food Item by id :", response);
+            // console.log("food Item by id :", response);
 
             return response
         } catch (error) {
@@ -263,7 +177,7 @@ const foodItemSlice = createSlice({
                 // state.loading = true;
             })
             .addCase(deleteFoodItem.fulfilled, (state, action) => {
-                console.log("foode item in slice :", action.payload);
+                // console.log("foode item in slice :", action.payload);
 
                 state.foodItem = state.foodItem.filter(item => item._id !== action.payload);
                 // state.loading = false;
@@ -274,9 +188,12 @@ const foodItemSlice = createSlice({
             })
             .addCase(updateFoodItem.fulfilled, (state, action) => {
                 state.updateFoodData = {}
+                // state.newFoodData={}
             })
             .addCase(getOneFoodItem.fulfilled, (state, action) => {
                 state.updateFoodData = action.payload?.result
+                // console.log(action.payload?.result?.description);
+                
             })
     }
 });

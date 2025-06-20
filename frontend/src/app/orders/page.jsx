@@ -4,7 +4,6 @@ import '../../assets/css/order.css'
 import Image from 'next/image';
 import Link from 'next/link';
 import UseOrderItem from '../../hooks/useOrderItem';
-import { toast } from 'react-toastify';
 import { PageSpinner } from '../../components/Loaders';
 // import OrderForm from '../cart/AddOrder'
 
@@ -27,7 +26,7 @@ const OrderList = () => {
             <ul className="navbar-list">
               <li className="logo-item">
                 <a href="#" className="logo">
-                  <Image src="/images/logo.png" alt="Example Image" width={70} height={200} />
+                  <Image src="/Images/logo.png" alt="Example Image" width={70} height={200} />
                 </a>
               </li>
               <li className="heading-item">
@@ -74,6 +73,8 @@ const OrderList = () => {
                                 fill
                                 sizes="48px"
                                 className={"img"}
+                                // width={100}
+                                // height={100}
                               />
                             </div>
 

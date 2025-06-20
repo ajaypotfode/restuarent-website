@@ -7,9 +7,9 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* justify-content: center; */
   height: 100vh;
   background-color: black;
+  /* border: 1px solid red; */
 }
 
 /* .login-container .login-navbar{
@@ -57,7 +57,7 @@
   overflow-y: auto;
   width: 100%;
   display: flex;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 
 }
 
@@ -73,7 +73,7 @@
   flex-direction: column;
   align-items: center;
   font-size: 1.6rem;
-  margin-top: 10%;
+  margin-top: 6%;
   /* transition: none; */
 }
 

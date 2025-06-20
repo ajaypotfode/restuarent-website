@@ -33,18 +33,18 @@ body {
 
 
 .main-container {
-   background-color: #010103;
+  background-color: #010103;
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 
-.main-container > :first-child {
+.main-container> :first-child {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: black; 
+  background-color: black;
 }
 
 .scrollable-content {
@@ -96,7 +96,7 @@ section {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 1rem;
   z-index: 50;
-    /* display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center; */
 }
@@ -129,10 +129,11 @@ section {
   right: 0;
   z-index: 1000;
 }
-.navbar{
+
+.navbar {
   /* border: 1px solid red; */
-   /* width: 100%; */
-    flex: 1;
+  /* width: 100%; */
+  flex: 1;
 }
 
 .header .navbar ul {
@@ -196,7 +197,7 @@ section {
   display: flex;
   align-items: center;
   background: linear-gradient(90deg, rgb(0 0 0 / 90%), rgb(68 68 68 / 35%)),
-    url(/images/home-image.jpg) no-repeat;
+    url(/Images/home-image.jpg) no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -439,6 +440,10 @@ section {
 .footer {
   background: #13131a;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer .share {
@@ -574,10 +579,6 @@ section {
   .home .content p {
     font-size: 1.5rem;
   }
-
-  /* #menulist {
-    overflow: auto;
-  } */
 
   #me-img {
     height: 60px;

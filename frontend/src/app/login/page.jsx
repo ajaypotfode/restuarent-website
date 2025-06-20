@@ -1,13 +1,8 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
-// import "@/assets/css/login.css"
 import "../../assets/css/login.css"
 import Link from 'next/link'
 import UseUserAuth from '../../hooks/useUserAuth';
 import Image from 'next/image';
-// import { Link, useNavigate,Outlet } from 'react-router-dom'
-// import '../../assets/css/login.css'
-// import { UserAuthContext } from '../../context/userContext';
 
 const Login = () => {
     const { loginData, handleLoginData, getUserLogin, setShowPassword, showPassword, loading, error, formError } = UseUserAuth()
@@ -19,7 +14,7 @@ const Login = () => {
                     <ul className="navbar-list">
                         <li className="logo-item">
                             <a href="#" className="logo">
-                                <Image src="/images/logo.png" alt="Example Image" width={70} height={200} />
+                                <Image src="/Images/logo.png" alt="Example Image" width={70} height={200} />
                             </a>
                         </li>
                         <li className="heading-item">

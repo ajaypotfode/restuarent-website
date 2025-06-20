@@ -1,19 +1,10 @@
 "use client"
-import React, { useContext, useEffect } from "react";
-import { useState } from "react";
-import { menuCard, menuimg } from "../../data/Data";
-// import data from "../../data/menu"
-import { UserAuthContext } from "../../context/foodItemContext";
+import { menuCard} from "../../data/Data";
 import Image from "next/image";
-import { MdFreeBreakfast } from "react-icons/md";
-import { OrderFood } from "../../context/orderContext";
 
 
 const Menu = () => {
-  // const foodContext = useContext(UserAuthContext);
-  // const cartContext = useContext(OrderFood)
-  // const { getItemsCategory, filterdData } = foodContext
-  // const { addCartItems, cartItem } = cartContext
+
   return (
     <>
       <section className="menu" id="menu">

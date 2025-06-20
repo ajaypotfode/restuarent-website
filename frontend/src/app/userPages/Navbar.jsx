@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaBars, FaCartPlus } from "react-icons/fa";
 import Link from "next/link";
 
-const Navbar = ({ isToken, getUserLogout, role }) => {
+const Navbar = ({ isToken, getUserLogout, role, getToken }) => {
   // const router = useRouter();
   const navbarRef = useRef();
 
@@ -18,7 +18,7 @@ const Navbar = ({ isToken, getUserLogout, role }) => {
     <>
       <header className="header">
         <a href="#" className="logo">
-          <Image src="/images/logo.png" alt="Example Image" width={500} height={300} />
+          <Image src="/Images/logo.png" alt="Example Image" width={500} height={300} />
           {/* <img src={Logo} alt="" /> */}
         </a>
         <nav className="navbar" ref={navbarRef}>
@@ -31,7 +31,10 @@ const Navbar = ({ isToken, getUserLogout, role }) => {
                 : <li className="link" onClick={getUserLogout}>Logout</li>
             }
             {role === "admin" && <li className="link"><Link href="/admin" >Dashboard</Link></li>}
-
+            {/* {
+              !getToken() ? <li className="link"><Link href="/login" >Login</Link></li>
+                : <li className="link" onClick={getUserLogout}>Logout</li>
+            } */}
 
           </ul>
         </nav>

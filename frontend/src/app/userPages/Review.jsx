@@ -12,7 +12,7 @@ const Review = () => {
         <div className="box-container">
           {review.map((item, index) => (
             <div className="box" key={index * Math.random()}>
-              <img src="/images/quote-img.png" alt=" image not Found"  className="quote" />
+              <img src="/Images/quote-img.png" alt=" image not Found"  className="quote" />
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
                 nulla sit libero nemo fuga sequi nobis? Necessitatibus aut

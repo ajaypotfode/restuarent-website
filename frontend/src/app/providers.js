@@ -30,6 +30,7 @@ export function Providers({ children }) {
 }
 
 
+// it is use to avoid suspense boundry error while production build (beacause used useSearchParams();)
 const ProviderSWrapper = ({ children }) => {
   return (
     <Suspense>

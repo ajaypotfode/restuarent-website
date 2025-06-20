@@ -1,14 +1,8 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
 import '../../assets/css/login.css'
 import Link from 'next/link'
-import { FaEye, FaUser } from 'react-icons/fa'
-import { MdEmail } from 'react-icons/md'
 import UseUserAuth from '../../hooks/useUserAuth'
-import Image from 'next/image'
-// import '../../assets/css/login.css'
-// import { UserAuthContext } from '../../context/userContext'
-// import { Link, useNavigate } from 'react-router-dom'
+
 
 const SignUp = () => {
   const { signUpData, handleSignUpData, getUserSignUp, setShowPassword, showPassword, formError } = UseUserAuth()

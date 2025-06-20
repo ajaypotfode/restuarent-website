@@ -11,7 +11,7 @@ const About = () => {
 
         <div className="row">
           <div className="image">
-            <Image src="/images/about-image.jpg" alt="" />
+            <Image src="/Images/about-image.jpg" width={200} height={200} alt="" />
 
           </div>
 

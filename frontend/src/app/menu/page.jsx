@@ -2,99 +2,16 @@
 "use client"
 import React, { useContext, useEffect } from "react";
 import '../../assets/css/menuPage.css'
-import { useState } from "react";
-import { menuimg, menuType } from "../../data/Data";
-// import data from "../../data/menu"
-import { UserAuthContext } from "../../context/foodItemContext";
+import { menuType } from "../../data/Data";
 import Image from "next/image";
-import { MdFreeBreakfast } from "react-icons/md";
-import { OrderFood } from "../../context/orderContext";
 import UseFoodData from "../../hooks/useFoodItem";
 import { FaCartPlus } from "react-icons/fa";
 import Link from "next/link";
 import UseCartItem from "../../hooks/useCartItem";
 import { PageSpinner } from "../../components/Loaders";
-const menuList = [
-    {
-        id: 1,
-        name: 'Biryani',
-        type: 'Lunch',
-        image: '/Images/menu-items/cake.png',
-        price: 200,
-        quantity: 1,
-        description: ""
-    },
-    {
-        id: 2,
-        description: "",
-        name: 'Pav-Bhaji',
-        type: 'Snack',
-        image: '/Images/menu-items/nonveg.png',
-        price: 100,
-        quantity: 2,
-    },
-
-    {
-        id: 2,
-        description: "",
-        name: 'Caesar Salad',
-        type: 'Dinner',
-        image: '/Images/menu-items/salad.png',
-        price: 150,
-        quantity: 3,
-    },
-    {
-        id: 2,
-        description: "",
-        name: 'Biryani',
-        type: 'Lunch',
-        image: '/Images/menu-items/cake.png',
-        price: 200,
-        quantity: 1,
-    },
-    {
-        id: 2,
-        description: "",
-        name: 'Pav-Bhaji',
-        type: 'Snack',
-        image: '/Images/menu-items/nonveg.png',
-        price: 100,
-        quantity: 2,
-    },
-
-    {
-        id: 2,
-        description: "",
-        name: 'Caesar Salad',
-        type: 'Dinner',
-        image: '/Images/menu-items/salad.png',
-        price: 150,
-        quantity: 3,
-    },
-    {
-        id: 2,
-        description: "",
-        name: 'Biryani',
-        type: 'Lunch',
-        image: '/Images/menu-items/cake.png',
-        price: 200,
-        quantity: 1,
-    },
-];
 
 const MenuPage = () => {
-    const { foodItem,
-        loading,
-        newFoodData,
-        filterdData,
-        handleFoodItemData,
-        uploadFoodImage,
-        submitFoodData,
-        getFoodItems,
-        removeFoodItem,
-        // filterCategory,
-        resetCurrentFoodItem,
-        imageInputRef } = UseFoodData()
+    const { foodItem, loading, getFoodItems, } = UseFoodData()
 
     const { addCartItems, cartCount } = UseCartItem()
 
@@ -110,7 +27,7 @@ const MenuPage = () => {
                     <ul className="navbar-list">
                         <li className="logo-item">
                             <a href="#" className="logo">
-                                <Image src="/images/logo.png" alt="Example Image" width={70} height={200} />
+                                <Image src="/Images/logo.png" alt="Example Image" width={70} height={200} />
                             </a>
                         </li>
                         <li className="heading-item">

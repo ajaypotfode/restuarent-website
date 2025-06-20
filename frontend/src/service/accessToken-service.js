@@ -8,8 +8,6 @@ if (typeof window !== "undefined") {
 }
 
 export const setToken = async (token) => {
-
-
     const decoded = jwtDecode(token);
     
     const restroToken = JSON.stringify(token)

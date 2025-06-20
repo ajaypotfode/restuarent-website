@@ -19,7 +19,7 @@ removeFormErrors }) => {
 
   return (
     <div className="add-food-form" onClick={removeFormErrors}>
-      <h1 className="heading">Add <span>User</span></h1>
+      <h1 className="heading">Add <span>Food</span></h1>
       <div className="add-food-form-wrapper" onClick={(e)=>e.stopPropagation()}>
         <form onSubmit={submitFoodData} >
         <div className="input-wrapper">
@@ -39,7 +39,7 @@ removeFormErrors }) => {
           <label>Description:</label>
           <textarea
             name="description"
-            value={newFoodData.description || ""}
+            value={newFoodData.description|| ""}
             onChange={handleFoodItemData}
           />
           {<p style={{ color: "red", margin: "0px", fontSize: '1.5rem' }} >{formError.description}</p>}
